@@ -1,0 +1,62 @@
+<mat-toolbar>
+  <span>WeatherApp</span>
+</mat-toolbar>
+
+<div class="row">
+  <form class="search-form">
+    <mat-form-field color="accent" class="search-form-full-width">
+      <mat-label>Enter location...</mat-label>
+      <input matInput [formControl]="cityInputFormControl" />
+    </mat-form-field>
+
+    <button mat-button class="submitButton" (click)="updateCityValue()">
+      Search
+    </button>
+  </form>
+  <button mat-button (click)="resetToDefaultOrder()">
+    Reset to default order
+  </button>
+</div>
+<div class="grid-stack">
+  @if (widgets$) { @for (widget of widgets$ | async; track widget.id) {
+  <div
+    class="grid-stack-item"
+    [attr.gs-id]="widget.id"
+    [attr.gs-x]="widget.x"
+    [attr.gs-y]="widget.y"
+    [attr.gs-w]="widget.w"
+    [attr.gs-h]="widget.h"
+    [attr.gs-min-w]="widget.minW"
+    [attr.gs-min-h]="widget.minH"
+    #gridStackItem
+  >
+    @switch (widget.id) { @case (1) {
+    <div class="grid-stack-item-content">
+      <app-current-weather
+        [currentWeather]="currentWeather$ | async"
+        [widgets]="widgets$ | async"
+      ></app-current-weather>
+    </div>
+    } @case (2) {
+    <div class="grid-stack-item-content">
+      <app-air-pollution
+        [airPollution]="airPollution$ | async"
+        [airPollutionComponents]="airPollutionComponents$ | async"
+        [selectedAirComponents]="selectedAirComponents$ | async"
+        [chartType]="chartType$ | async"
+        [airComponents]="airComponents$ | async"
+        (onSetChartType)="setChartType($event)"
+        (onSetSelectedAirComponents)="setSelectedAirComponents($event)"
+      ></app-air-pollution>
+    </div>
+    } @case (3) {
+    <div class="grid-stack-item-content">
+      <app-day-length
+        [dayLength]="dayLength$ | async"
+        [cityInputValue]="cityInputValue$ | async"
+      ></app-day-length>
+    </div>
+    } }
+  </div>
+  } }
+</div>

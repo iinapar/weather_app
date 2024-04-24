@@ -1,0 +1,70 @@
+<div class="row">
+  <h4>Select chart type:</h4>
+  <div mat-dialog-actions>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>
+
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="chartType"
+  (change)="setChartType($event.value)"
+>
+  <mat-radio-button class="example-radio-button" [value]="'Bar'"
+    >Bar</mat-radio-button
+  >
+  <mat-radio-button class="example-radio-button" [value]="'Card'"
+    >Card</mat-radio-button
+  >
+</mat-radio-group>
+
+<section class="example-section">
+  <h4 mat-dialog-title>Select components</h4>
+  <div mat-dialog-content>
+    <form [formGroup]="airComponentsForm">
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="co"
+          >Carbon monoxide (co)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="no"
+          >Nitrogen monoxide (no)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="no2"
+          >Nitrogen dioxide (no2)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="o3"
+          >Ozone (o3)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="so2"
+          >Sulphur dioxide (so2)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="pm2_5"
+          >Fine particles matter (pm2_5)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="pm10"
+          >Coarse particulate matter (pm10)</mat-checkbox
+        >
+      </p>
+      <p>
+        <mat-checkbox (change)="onCheckboxChange()" formControlName="nh3"
+          >Ammonia (nh3)</mat-checkbox
+        >
+      </p>
+    </form>
+  </div>
+</section>

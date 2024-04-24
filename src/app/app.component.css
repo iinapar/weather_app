@@ -1,0 +1,44 @@
+mat-toolbar {
+  background-color: #0a001e;
+  color: rgb(214, 214, 214);
+}
+.grid-stack-item-content {
+  background-color: #9494948e;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 2px rgba(29, 29, 29, 0.413);
+  color: rgb(214, 214, 214);
+  border-radius: 0.5rem;
+}
+
+button {
+  background-color: rgb(147, 82, 16);
+  margin-top: 1rem;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+  margin-right: 3rem;
+}
+
+form {
+  padding: 1rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  flex-grow: 1;
+}
+
+.search-form-full-width {
+  margin-right: 8px;
+}
+
+.submitButton {
+  padding: 0rem;
+  margin: 0rem;
+}

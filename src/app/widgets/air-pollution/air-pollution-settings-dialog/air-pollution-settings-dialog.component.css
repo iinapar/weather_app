@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  background-color: #686868f0;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+h4 {
+  padding-top: 1rem;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}

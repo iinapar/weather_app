@@ -1,0 +1,42 @@
+.time {
+  font-size: 0.75rem;
+  color: rgb(172, 172, 172);
+  font-weight: 300;
+}
+
+.good {
+  color: rgb(0, 84, 15);
+  font-weight: 500;
+}
+.fair {
+  color: rgb(94, 152, 2);
+  font-weight: 500;
+}
+.moderate {
+  color: rgb(147, 172, 0);
+  font-weight: 500;
+}
+.poor {
+  color: rgb(162, 133, 5);
+  font-weight: 500;
+}
+.verypoor {
+  color: rgb(152, 22, 2);
+  font-weight: 500;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+h3 {
+  flex-grow: 1;
+  padding-left: 3rem;
+  padding-top: 0.75rem;
+}
+
+button {
+  color: rgb(143, 143, 143);
+  padding-bottom: 2rem;
+}

@@ -1,0 +1,10 @@
+@if (dayLength) {
+<p><mat-icon fontIcon="wb_twilight"></mat-icon></p>
+
+<p>
+  <span class="time">Sunrise:</span> {{ dayLength[0] | date : "shortTime" }}
+</p>
+<p><span class="time">Sunset: </span>{{ dayLength[1] | date : "shortTime" }}</p>
+<p><span class="time"> Length: </span>{{ dayLength[2] }}</p>
+<h1>{{ cityInputValue }}</h1>
+}

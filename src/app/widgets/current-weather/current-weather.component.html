@@ -1,0 +1,25 @@
+@if (currentWeather && currentWeather.weather.weather) {
+<p class="time">
+  Updated {{ currentWeather.weather.dt * 1000 | date : "shortTime" }}
+</p>
+<h3>{{ currentWeather.weather.name }}</h3>
+<p class="weather">
+  <span class="temp">
+    {{ currentWeather.weather.main.temp | number : "1.0-0" }}°C</span
+  >
+  <img
+    src="http://openweathermap.org/img/wn/{{
+      currentWeather.weather.weather[0].icon
+    }}.png"
+    alt="Weather Icon"
+  />
+</p>
+<p class="time">
+  Wind: {{ currentWeather.weather.wind.speed | number : "1.0-0" }} m/s
+</p>
+<p class="time">
+  Feels like: {{ currentWeather.weather.main.feels_like | number : "1.0-0" }}°C
+</p>
+} @else {
+<p>No data available</p>
+}

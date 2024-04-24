@@ -1,0 +1,22 @@
+img {
+  height: 3.5rem;
+}
+
+.weather {
+  display: flex;
+  align-items: center;
+}
+
+.temp {
+  font-size: 1.75rem;
+  padding-left: 1rem;
+  color: rgb(214, 214, 214);
+}
+
+.time {
+  font-size: 0.65rem;
+  font-weight: 300;
+  padding: 0rem;
+  margin: 0rem;
+  color: rgb(172, 172, 172);
+}

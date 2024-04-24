@@ -1,0 +1,47 @@
+@if (airPollution && airPollution[0]) {
+<div class="row">
+  <h3>Air Pollution</h3>
+
+  <button mat-icon-button (click)="openCheckboxDialog()">
+    <mat-icon>settings</mat-icon>
+  </button>
+</div>
+<p class="time">
+  Level: {{ airPollution[0].main.aqi }}
+  @switch (airPollution[0].main.aqi) { @case (1) {
+  <span class="good">GOOD</span>
+  } @case (2) {
+  <span class="fair">FAIR</span>
+  } @case (3) {
+  <span class="moderate">MODERATE</span>
+  } @case (4) {
+  <span class="poor">POOR</span>
+  } @case (5) {
+  <span class="verypoor">VERY POOR</span>
+  } }
+</p>
+}
+<div>
+  @if (chartType === 'Bar') {
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="'night'"
+    [results]="selectedAirComponents"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [yAxisLabel]="'μg/m3'"
+  >
+  </ngx-charts-bar-vertical>
+  } @else if (chartType === 'Card') {
+
+  <ngx-charts-number-card
+    [view]="view"
+    [scheme]="'night'"
+    [results]="selectedAirComponents"
+    [valueFormatting]="labelFormatting"
+  >
+  </ngx-charts-number-card>
+  }
+</div>
