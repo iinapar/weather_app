@@ -16,6 +16,13 @@ export const selectCity = createSelector(selectWeatherState, (state) => {
   return state.city;
 });
 
+export const selectTemperatureType = createSelector(
+  selectWeatherState,
+  (state) => {
+    return state.temperatureType;
+  }
+);
+
 export const selectSunsetData = createSelector(
   selectAllWeatherData,
   (state) => {

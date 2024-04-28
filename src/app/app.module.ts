@@ -8,8 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AirPollutionComponent } from './widgets/air-pollution/air-pollution.component';
-import { CurrentWeatherComponent } from './widgets/current-weather/current-weather.component';
+import { AirPollutionComponent } from './dashboard/widgets/air-pollution/air-pollution.component';
+import { CurrentWeatherComponent } from './dashboard/widgets/current-weather/current-weather.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
@@ -27,8 +27,10 @@ import { airPollutionReducer } from './store/reducers/airpollution.reducers';
 
 import { CurrentWeatherEffects } from './store/effects/currentweather.effects';
 import { AirPollutionEffects } from './store/effects/airpollution.effects';
-import { DayLengthComponent } from './widgets/day-length/day-length.component';
-import { AirPollutionSettingsDialogComponent } from './widgets/air-pollution/air-pollution-settings-dialog/air-pollution-settings-dialog.component';
+import { DayLengthComponent } from './dashboard/widgets/day-length/day-length.component';
+import { AirPollutionSettingsDialogComponent } from './dashboard/widgets/air-pollution/air-pollution-settings-dialog/air-pollution-settings-dialog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardContainerComponent } from './dashboard/dashboard.container';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AirPollutionSettingsDialogComponent } from './widgets/air-pollution/air
     CurrentWeatherComponent,
     DayLengthComponent,
     AirPollutionSettingsDialogComponent,
+    DashboardComponent,
+    DashboardContainerComponent,
   ],
   imports: [
     BrowserModule,

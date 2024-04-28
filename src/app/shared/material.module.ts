@@ -10,7 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DialogModule } from '@angular/cdk/dialog';
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatGridListModule } from '@angular/material/grid-list';
 @NgModule({
   declarations: [],
   imports: [
@@ -24,6 +25,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule,
+    MatGridListModule,
   ],
   exports: [
     DialogModule,
@@ -36,6 +39,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule,
+    MatGridListModule,
   ],
 })
 export class MaterialModule {}

@@ -1,0 +1,44 @@
+.grid-stack-item-content {
+  background-color: #9494948e;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 2px rgba(29, 29, 29, 0.413);
+  color: rgb(214, 214, 214);
+  border-radius: 0.5rem;
+}
+
+button {
+  background-color: rgb(147, 82, 16);
+}
+
+form {
+  padding: 1rem;
+}
+
+.resetButton {
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.temperatureSelect {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  flex-grow: 1;
+}
+
+.search-form-full-width {
+  margin-right: 8px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 750px) {
+  .flex-container {
+    flex-direction: column;
+  }
+}

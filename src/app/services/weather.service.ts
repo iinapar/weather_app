@@ -9,15 +9,15 @@ import { environment } from '../../environments/environment';
 export class WeatherService {
   constructor(private http: HttpClient) {}
 
-  getCurrentWeather(city: string): Observable<any> {
+  getCurrentWeather(city: string, temperatureType: string): Observable<any> {
     return this.http.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&&appid=${environment.apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${temperatureType}&&appid=${environment.apiKey}`
     );
   }
 
-  getForecastWeather(city: string): Observable<any> {
+  getForecastWeather(city: string, temperatureType: string): Observable<any> {
     return this.http.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&&appid=${environment.apiKey}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}${temperatureType}&&appid=${environment.apiKey}`
     );
   }
 

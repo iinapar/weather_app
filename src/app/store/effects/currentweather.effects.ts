@@ -12,12 +12,14 @@ export class CurrentWeatherEffects {
       ofType(WeatherActions.getWeatherData),
 
       exhaustMap((action) =>
-        this.weatherService.getCurrentWeather(action.city).pipe(
-          map((weatherData) => {
-            return WeatherActions.getWeatherDataSuccess({ weatherData });
-          }),
-          catchError(() => EMPTY)
-        )
+        this.weatherService
+          .getCurrentWeather(action.city, action.temperatureType)
+          .pipe(
+            map((weatherData) => {
+              return WeatherActions.getWeatherDataSuccess({ weatherData });
+            }),
+            catchError(() => EMPTY)
+          )
       )
     )
   );

@@ -1,0 +1,77 @@
+<div class="flex-container">
+  <div class="search-form">
+    <form>
+      <mat-form-field color="accent" class="search-form-full-width">
+        <mat-label>Enter location...</mat-label>
+        <input matInput [formControl]="cityInputFormControl" />
+      </mat-form-field>
+
+      <button
+        mat-button
+        class="submitButton"
+        (click)="cityValue(cityInputFormControl.value)"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+  <div class="temperatureSelect">
+    <mat-form-field color="accent">
+      <mat-select
+        (selectionChange)="changeTemperatureType($event.value)"
+        [value]="temperatureUnit"
+      >
+        @for (type of types; track $index) {
+        <mat-option [value]="type.type">{{ type.name }}</mat-option
+        >}
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="resetButton">
+    <button mat-button (click)="defaultOrder()">Reset to default order</button>
+  </div>
+</div>
+<div class="grid-stack">
+  @if (widgets) { @for (widget of widgets; track widget.id) {
+  <div
+    class="grid-stack-item"
+    [attr.gs-id]="widget.id"
+    [attr.gs-x]="widget.x"
+    [attr.gs-y]="widget.y"
+    [attr.gs-w]="widget.w"
+    [attr.gs-h]="widget.h"
+    #gridStackItem
+  >
+    @switch (widget.id) { @case (1) {
+    <div class="grid-stack-item-content">
+      <app-current-weather
+        [currentWeather]="currentWeather"
+        [widgets]="widgets"
+        (onSetTemperatureType)="changeTemperatureType($event)"
+        [temperatureUnit]="temperatureUnit"
+      ></app-current-weather>
+    </div>
+    } @case (2) {
+    <div class="grid-stack-item-content">
+      <app-air-pollution
+        [airPollution]="airPollution"
+        [airPollutionComponents]="airpollutionComponents"
+        [selectedAirComponents]="selectedAirComponents"
+        [chartType]="chartType"
+        [airComponents]="airComponents"
+        (onSetChartType)="changechartType($event)"
+        (onSetSelectedAirComponents)="changeairComponents($event)"
+      ></app-air-pollution>
+    </div>
+    } @case (3) {
+    <div class="grid-stack-item-content">
+      <app-day-length
+        [dayLength]="dayLength"
+        [cityInputValue]="cityInputValue"
+      ></app-day-length>
+    </div>
+    } }
+  </div>
+  } }
+</div>
