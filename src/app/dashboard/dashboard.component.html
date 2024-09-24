@@ -71,6 +71,16 @@
         [cityInputValue]="cityInputValue"
       ></app-day-length>
     </div>
+    } @case (4) {
+    <div class="grid-stack-item-content">
+      <app-forecast
+        [forecast]="forecast"
+        [chartData]="chartData"
+        [forecastfor24h]="forecastfor24h"
+        [forecastType]="forecastType"
+        (onSetForecastType)="changeForecastType($event)"
+      ></app-forecast>
+    </div>
     } }
   </div>
   } }

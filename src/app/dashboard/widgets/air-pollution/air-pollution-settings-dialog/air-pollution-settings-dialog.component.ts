@@ -39,7 +39,7 @@ export class AirPollutionSettingsDialogComponent {
     this.onSetSelectedAirComponents.emit(selectedAirComponents);
   }
 
-  setChartType(value: any): void {
+  setChartType(value: string): void {
     this.onSetChartType.emit(value);
   }
 }

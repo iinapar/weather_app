@@ -33,6 +33,13 @@ export const initialState: WidgetState[] = [
     w: 2,
     h: 2,
   },
+  {
+    id: 4,
+    x: 8,
+    y: 0,
+    w: 4,
+    h: 4,
+  },
 ];
 
 export const widgetReducer = createReducer(
@@ -60,7 +67,3 @@ export const widgetReducer = createReducer(
     return initialState;
   })
 );
-
-export function reducer(state: any, action: any) {
-  return widgetReducer(state, action);
-}

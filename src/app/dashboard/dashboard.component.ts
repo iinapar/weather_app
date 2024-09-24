@@ -42,6 +42,18 @@ export class DashboardComponent {
   @Input()
   selectedAirComponents: any;
 
+  @Input()
+  forecast: any;
+
+  @Input()
+  chartData: any;
+
+  @Input()
+  forecastfor24h: any;
+
+  @Input()
+  forecastType: any;
+
   @Output()
   onChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -53,6 +65,9 @@ export class DashboardComponent {
 
   @Output()
   setChartType: EventEmitter<any> = new EventEmitter<any>();
+
+  @Output()
+  setForecastType: EventEmitter<any> = new EventEmitter<any>();
 
   @Output()
   setTemperatureType: EventEmitter<any> = new EventEmitter<any>();
@@ -82,6 +97,10 @@ export class DashboardComponent {
 
   changechartType(value: any) {
     this.setChartType.emit(value);
+  }
+
+  changeForecastType(value: any) {
+    this.setForecastType.emit(value);
   }
 
   changeTemperatureType(value: any) {

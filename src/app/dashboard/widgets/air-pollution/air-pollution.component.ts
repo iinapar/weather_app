@@ -61,7 +61,7 @@ export class AirPollutionComponent {
     );
   }
 
-  labelFormatting(c: any) {
+  valueFormatting(c: any) {
     return `${c.value} μg/m3`;
   }
 

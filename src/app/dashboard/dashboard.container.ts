@@ -7,13 +7,15 @@ import {
   GridStackWidget,
 } from 'gridstack';
 import { LocalStorageService } from '../services/localstorage.service';
-import { combineLatest } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import * as widgetSelectors from '../store/selectors/widget.selectors';
 import * as weatherSelectors from '../store/selectors/currentweather.selectors';
 import * as airpollutionSelectors from '../store/selectors/airpollution.selectors';
 import * as weatherActions from '../store/actions/currentweather.actions';
 import * as airPollutionActions from '../store/actions/airpollution.actions';
-import { updateWidget } from '../store/actions/widget.actions';
+import * as widgetActions from '../store/actions/widget.actions';
+import * as forecastSelectors from '../store/selectors/forecast.selectors';
+import * as forecastActions from '../store/actions/forecast.actions';
 
 @Component({
   selector: 'app-dashboard-container',
@@ -24,6 +26,13 @@ export class DashboardContainerComponent {
   @ViewChildren('gridStackItem') gridstackItems!: QueryList<
     ElementRef<GridItemHTMLElement>
   >;
+  chartData$ = this.store.select(forecastSelectors.selectForecastForChart);
+  forecast$ = this.store.select(
+    forecastSelectors.selectForecastDataGroupedByDays
+  );
+  forecastfor24h$ = this.store.select(
+    forecastSelectors.selectForecastForNext24Hours
+  );
   currentWeather$ = this.store.select(weatherSelectors.selectAllWeatherData);
   widgets$ = this.store.select(widgetSelectors.selectWidgets);
   airPollution$ = this.store.select(airpollutionSelectors.selectAirPollution);
@@ -32,6 +41,7 @@ export class DashboardContainerComponent {
   );
   airComponents$ = this.store.select(airpollutionSelectors.selectAirComponents);
   chartType$ = this.store.select(airpollutionSelectors.selectChartType);
+  forecastType$ = this.store.select(forecastSelectors.selectForecastType);
   dayLength$ = this.store.select(weatherSelectors.selectDayLength);
   temperatureUnit$ = this.store.select(weatherSelectors.selectTemperatureType);
 
@@ -41,6 +51,7 @@ export class DashboardContainerComponent {
   selectedAirComponents$: any = this.store.select(
     airpollutionSelectors.selectFilteredAirPollutionComponents
   );
+  private combinedSubscription!: Subscription;
 
   constructor(
     private store: Store,
@@ -56,7 +67,7 @@ export class DashboardContainerComponent {
       const storedWidgets = JSON.parse(storedWidgetsString);
       // Päivitetään storeen storagesta löytyvät tiedot
       storedWidgets.forEach((widget: any) => {
-        this.store.dispatch(updateWidget(widget));
+        this.store.dispatch(widgetActions.updateWidget(widget));
       });
     }
     if (this.localService.getItem('airComponents') !== null) {
@@ -84,6 +95,13 @@ export class DashboardContainerComponent {
       );
     }
 
+    if (this.localService.getItem('forecastType') !== null) {
+      const storedForecastType: any = this.localService.getItem('forecastType');
+      this.store.dispatch(
+        forecastActions.setForecastType({ forecastType: storedForecastType })
+      );
+    }
+
     if (this.localService.getItem('temperatureType') !== null) {
       const storedTemperatureType: any =
         this.localService.getItem('temperatureType');
@@ -94,12 +112,18 @@ export class DashboardContainerComponent {
       );
     }
 
-    combineLatest([
+    this.combinedSubscription = combineLatest([
       this.store.select(weatherSelectors.selectCity),
       this.store.select(weatherSelectors.selectTemperatureType),
     ]).subscribe(([city, temperatureType]) => {
       this.store.dispatch(
         weatherActions.getWeatherData({ city, temperatureType })
+      );
+      this.store.dispatch(
+        forecastActions.getForecastData({
+          city: city,
+          temperatureType: temperatureType,
+        })
       );
       this.store.dispatch(airPollutionActions.getAirPollution({ city }));
     });
@@ -132,6 +156,12 @@ export class DashboardContainerComponent {
     });
   }
 
+  ngOnDestroy() {
+    if (this.combinedSubscription) {
+      this.combinedSubscription.unsubscribe();
+    }
+  }
+
   onChange(list = this.grid.engine.nodes) {
     list.forEach((item: any) => {
       const widget = {
@@ -141,7 +171,7 @@ export class DashboardContainerComponent {
         h: item.h,
         w: item.w,
       };
-      this.store.dispatch(updateWidget(widget));
+      this.store.dispatch(widgetActions.updateWidget(widget));
     });
     let updatedWidgets: any;
     this.widgets$.subscribe((data: any) => (updatedWidgets = data));
@@ -184,6 +214,13 @@ export class DashboardContainerComponent {
   setChartType(value: string) {
     this.store.dispatch(airPollutionActions.setChartType({ ChartType: value }));
     this.localService.setItem('chartType', value);
+  }
+
+  setForecastType(value: string) {
+    this.store.dispatch(
+      forecastActions.setForecastType({ forecastType: value })
+    );
+    this.localService.setItem('forecastType', value);
   }
 
   setTemperatureType(value: any) {

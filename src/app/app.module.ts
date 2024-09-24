@@ -24,13 +24,17 @@ import { EffectsModule } from '@ngrx/effects';
 import { widgetReducer } from './store/reducers/widget.reducers';
 import { currentWeatherReducer } from './store/reducers/currentweather.reducers';
 import { airPollutionReducer } from './store/reducers/airpollution.reducers';
+import { forecastReducer } from './store/reducers/forecast.reducers';
 
 import { CurrentWeatherEffects } from './store/effects/currentweather.effects';
 import { AirPollutionEffects } from './store/effects/airpollution.effects';
+import { ForecastEffects } from './store/effects/forecast.effects';
+
 import { DayLengthComponent } from './dashboard/widgets/day-length/day-length.component';
 import { AirPollutionSettingsDialogComponent } from './dashboard/widgets/air-pollution/air-pollution-settings-dialog/air-pollution-settings-dialog.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardContainerComponent } from './dashboard/dashboard.container';
+import { ForecastComponent } from './dashboard/widgets/forecast/forecast.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { DashboardContainerComponent } from './dashboard/dashboard.container';
     AirPollutionSettingsDialogComponent,
     DashboardComponent,
     DashboardContainerComponent,
+    ForecastComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,13 +60,18 @@ import { DashboardContainerComponent } from './dashboard/dashboard.container';
         widgetReducer: widgetReducer,
         currentWeatherReducer: currentWeatherReducer,
         airPollutionReducer: airPollutionReducer,
+        forecastReducer: forecastReducer,
       },
       {}
     ),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
-    EffectsModule.forRoot([AirPollutionEffects, CurrentWeatherEffects]),
+    EffectsModule.forRoot([
+      AirPollutionEffects,
+      CurrentWeatherEffects,
+      ForecastEffects,
+    ]),
     HttpClientModule,
   ],
   providers: [provideAnimationsAsync(), HttpClient],
